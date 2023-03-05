@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.fillStyle = "black";
 
     for (let i = 1; i <= 12; i++) {
-      const x = originX + 80 * Math.sin((i * Math.PI) / 6) - 4; 
+      const x = originX + 80 * Math.sin((i * Math.PI) / 6) - 4;
       const y = originY - 80 * Math.cos((i * Math.PI) / 6) + 4;
       ctx.fillText(i, x, y);
     }
