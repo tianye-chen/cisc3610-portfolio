@@ -9,10 +9,13 @@ document.addEventListener("DOMContentLoaded", function () {
   let redCap = new Image();
   redCap.src = "./Red-Cap-Character-16x18.png";
 
+  let grassField = new Image();
+  grassField.src = "./grass_field.png";
+
   const scale = 2;
   const width = 16;
   const height = 18;
-  let step = 2;
+  let step = 4;
 
   let greenCanvasX = 0;
   let greenCanvasY = 0;
@@ -34,24 +37,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // dialogue setup
   let dialogueIndex = 0;
-  const dialogue = ["Hey there.",
-  "Wanna hear a joke?",
-  "What comes after USA?",
-  "USB!",
-  "Haha, I'm so funny...",
-  ""
-  ]
+  const dialogue = [
+    "",
+    "Hey there.",
+    "Wanna hear a joke?",
+    "What comes after USA?",
+    "USB!",
+    "Haha, I'm so funny...",
+  ];
 
   function init() {
-
     window.addEventListener("keydown", keyDown, false);
-    window.addEventListener("keyup", function () { isKeyDown = false; }, false);
+    window.addEventListener(
+      "keyup",
+      function () {
+        isKeyDown = false;
+      },
+      false
+    );
 
     window.requestAnimationFrame(animate);
   }
 
   function animate() {
-    displayDialogue();
     frameCount++;
 
     if (frameCount < frameRate) {
@@ -62,11 +70,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    isKeyDown ? drawFrame(walkAnimLoop[currWalkAnimIndex], currDirection, greenCanvasX, greenCanvasY) : 
-      drawFrame(0, currDirection, greenCanvasX, greenCanvasY);
+    ctx.drawImage(grassField, 0, 0, canvas.width, canvas.height);
+    displayDialogue();
+    displayInstructions();
+
+    isKeyDown
+      ? drawFrame(walkAnimLoop[currWalkAnimIndex], currDirection, greenCanvasX, greenCanvasY)
+      : drawFrame(0, currDirection, greenCanvasX, greenCanvasY);
     currWalkAnimIndex = (currWalkAnimIndex + 1) % walkAnimLoop.length;
 
-    ctx.drawImage(redCap, 0 , 18 * 2, width, height, redCanvasX, redCanvasY, width * scale, height * scale);
+    ctx.drawImage(
+      redCap,
+      0,
+      18 * 2,
+      width,
+      height,
+      redCanvasX,
+      redCanvasY,
+      width * scale,
+      height * scale
+    );
     window.requestAnimationFrame(animate);
   }
 
@@ -85,35 +108,55 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function keyDown(e) {
-    isKeyDown = true;
-
     switch (e.keyCode) {
       case 87: // w
+        isKeyDown = true;
         currDirection = 1;
         greenCanvasY -= step;
         break;
       case 65: // a
+        isKeyDown = true;
         currDirection = 2;
         greenCanvasX -= step;
         break;
       case 83: // s
+        isKeyDown = true;
         currDirection = 0;
         greenCanvasY += step;
         break;
       case 68: // d
+        isKeyDown = true;
         currDirection = 3;
         greenCanvasX += step;
         break;
       case 32: // space
-        dialogueIndex++;
+        checkInRangeForDialogue ? dialogueIndex = (dialogueIndex + 1) % dialogue.length : null;
         break;
     }
   }
 
   function displayDialogue() {
     // display dialogue
+    if (dialogueIndex !== 0) {
+      ctx.fillStyle = "#ffffffaa";
+      ctx.fillRect(redCanvasX - 30, redCanvasY - 40, 200, 30);
+    }
     ctx.font = "16px sans-serif";
     ctx.fillStyle = "black";
     ctx.fillText(dialogue[dialogueIndex], redCanvasX - 20, redCanvasY - 20);
+  }
+
+  function checkInRangeForDialogue() {
+    return redCanvasX - greenCanvasX < width * 3 && redCanvasY - greenCanvasY  < height * 3;
+  }
+
+  function displayInstructions() {
+
+    ctx.fillStyle = "#ffffffaa";
+    ctx.fillRect(0, canvas.height - 70, 220, 70);
+    ctx.font = "16px sans-serif";
+    ctx.fillStyle = "black";
+    ctx.fillText("Press space for dialogue", 10, canvas.height - 20);
+    ctx.fillText("Press WASD for movement", 10, canvas.height - 40);
   }
 });
