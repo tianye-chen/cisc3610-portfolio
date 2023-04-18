@@ -7,9 +7,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="bg-[url('../assignment3/images/space-background.jpg')] bg-repeat bg-cover bg-black">
-    <div>
-      <h1 class="text-white text-2xl underline">Hello</h1>
+  <body class="bg-black bg-repeat bg-cover">
+    <div class="flex flex-col items-center justify-center min-h-[100vh] text-white">
+      <h1 class="text-6xl font-bold">Find out your weight on other planets</h1>
+      <p class="text-xl">Enter your weight in pounds</p>
+      <form class="flex flex-col items-center">
+        <input class="text-center text-black text-3xl font-bold border-4 max-w-[40%] border-white rounded-md p-4" type="text" id="weight" />
+      </form>
+      <h1 class="text-6xl font-bold" id="planet-name"></h1>
+      <div class="flex flex-row items-center mt-16">
+        <span class="mx-2 opacity-25 cursor-pointer select-none" id="carousel-item-left"> </span>
+        <span class="mx-2" id="carousel-item-center"> </span>
+        <span class="mx-2 opacity-25 cursor-pointer select-none" id="carousel-item-right"> </span>
+      </div>
+
+      <div>
+        <span class="text-6xl font-bold text-gray-500"> Your weight on </span>
+        <span class="text-6xl font-bold" id="planet-name2"> </span>
+        <span class="text-6xl font-bold" id="adjusted-weight"> 0 </span>
+      </div>
     </div>
   </body>
 </html>
