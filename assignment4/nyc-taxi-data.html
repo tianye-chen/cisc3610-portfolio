@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NYC Taxi Data</title>
+    <link rel="stylesheet" type="text/css" href="../dist/output.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.umd.min.js" integrity="sha512-TJ7U6JRJx5IpyvvO9atNnBzwJIoZDaQnQhb0Wmw32Rj5BQHAmJG16WzaJbDns2Wk5VG6gMt4MytZApZG47rCdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    <div class="font-bold text-center text-x" id="title"> Loading...</div>
+    <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-4 h-[45vh] m-6 w-[120vw]">
+      <canvas class="" id="avg-fare-and-distance-chart"> </canvas>
+      <canvas id="payment-type-chart"> </canvas>
+      <canvas id="total-fare-chart"> </canvas>
+      <canvas id="ride-type-chart"> </canvas>
+    </div>
+
+    <script src="./nyc-taxi-data.js" type="text/javascript"></script>
+  </body>
+</html>
