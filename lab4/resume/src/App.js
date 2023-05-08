@@ -1,13 +1,20 @@
 import React from "react";
-import { Layout } from "./Layout/layout.js";
+import { Layout } from "./Components/Layout.js";
+import { Home } from "./pages/Home.js";
+import { About } from "./pages/About.js";
+import { Education } from "./pages/Education.js";
+import { Skills } from "./pages/Skills.js";
+import { Projects } from "./pages/Projects.js";
 
 function App() {
   return (
-    <div className="App">
-      <Layout>
-        this is a test
-      </Layout>
-    </div>
+    <Layout>
+        <Home />
+        <About />
+        <Education />
+        <Skills />
+        <Projects />
+    </Layout>
   );
 }
 
